@@ -53,7 +53,7 @@ Vagrant.configure('2') do |config|
   config.vm.box_version = ">= 20181112.0.0"
 
   # Use precompiled box
-  config.vm.box = 'seravo/wordpress'
+  config.vm.box = 'seravo/wordpress-beta'
 
   # Use the name of the box as the hostname
   config.vm.hostname = site_config['name']
@@ -171,10 +171,10 @@ Vagrant.configure('2') do |config|
       end
 
       # Attempt to use the asset proxy for production url defined in config.yml
-      run_remote "wp-use-asset-proxy &> /dev/null"
+      run_remote "wp-use-asset-proxy"
 
       # Restart nginx because the file system might not have been ready when the certificate was created
-      run_remote "wp-restart-nginx &> /dev/null"
+      run_remote "wp-restart-nginx"
 
       # Run 'vagrant up' customizer script if it exists
       if File.exist?(File.join(DIR, 'vagrant-up-customizer.sh'))
