@@ -34,16 +34,19 @@ function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated 
   populate_options();
   populate_roles();
 
-  if ( $language ) {
+/*  if ( $language ) {
     update_option( 'WPLANG', $language );
   } else {
     update_option( 'WPLANG', 'fi' ); // Use fi as default if language is not defined
   }
+*/
+
+  update_option( 'WPLANG', 'en' ); // Use en until the sample content has been localized
 
   update_option('blogname', $blog_title);
   update_option('admin_email', $user_email);
   update_option('blog_public', $public);
-  update_option('blogdescription',__('Uusi WP-palvelu.fi -sivusto'));
+  update_option('blogdescription',__('A fresh WordPress installation by Seravo'));
 
   $guessurl = wp_guess_url();
 
@@ -187,10 +190,10 @@ function wp_install_defaults( $user_id ) {
 		$first_post = str_replace( 'SITE_URL', esc_url( network_home_url() ), $first_post );
 		$first_post = str_replace( 'SITE_NAME', get_current_site()->site_name, $first_post );
 	} else {
-    $first_post = __('<p>Hienoa, että valitsit palvelumme WP-palvelu.fi:n!</p>
-<p>Voit aloittaa <a href="/wp-login.php">kirjautumalla sisälle</a>.</p>
-<p>Saat apua kysymyksiin lukemalla: <a href="https://wp-palvelu.fi/ohjeet/">wp-palvelu.fi/ohjeet/</a></p>
-<p><img class="wp-image-6 alignnone" src="https://wp-palvelu.fi/wp-palvelu-logo-blue.png" alt="wp-palvelu-logo" width="237" height="50" /></p>');
+    $first_post = __('<p>We are very happy that you have chosen Seravo!</p>
+<p>You might want to begin by <a href="/wp-login.php">logging in</a>.</p>
+<p>For all your questions about WordPress and Seravo, please visit our <a href="https://help.seravo.com">user documentation</a>. More specifically you might be interested in documentation concerning <a href="https://help.seravo.com/en/knowledgebase/15">site migration</a> or <a href="https://seravo.com/docs/">developer documentation</a>, depending on whether you are moving a site that exists already or builidng a new one.</p>
+<p><img class="wp-image-6 alignnone" src="https://seravo.com/logo/seravo-180x180.png" alt="seravo-logo" width="90" height="90" /></p>');
 	}
 
 	$wpdb->insert( $wpdb->posts, array(
